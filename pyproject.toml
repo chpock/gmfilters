@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "gmf"
+version = "0.1.0"
+description = "A tool to define gmail filters in declarative way and YAML format."
+authors = ["Konstantin Kushnir <chpock@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/chpock/gmf"
+homepage = "https://github.com/chpock/gmf"
+classifiers = [
+  "Topic :: Communications :: Email :: Filters",
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+google-api-python-client = "^2.149.0"
+google-auth-oauthlib = "^1.2.1"
+PyYAML = "^6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
