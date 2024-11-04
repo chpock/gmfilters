@@ -9,3 +9,4 @@ build/
 dist/
 poetry.lock
 client_secret.json
+filters*.yaml

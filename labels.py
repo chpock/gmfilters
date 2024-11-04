@@ -19,8 +19,8 @@ def create_fake_label(name):
 
 class GmailLabels:
 
-    def __init__(self, gmailsvc, dry_run=False):
-        self.gmailsvc = gmailsvc
+    def __init__(self, service, dry_run=False):
+        self.service = service
         self.dry_run = dry_run
         self.reload()
 
@@ -28,7 +28,7 @@ class GmailLabels:
         return iter(self.labels)
 
     def reload(self):
-        self.labels = (self.gmailsvc.users()
+        self.labels = (self.service.users()
             .labels()
             .list(userId="me")
             .execute()["labels"])
@@ -37,6 +37,16 @@ class GmailLabels:
         for label in self.labels:
             if label["id"] == name or label["name"] == name:
                 return label
-        raise KeyError(name)
+        new_label = (self.service.users()
+            .labels()
+            .create(userId="me", body={
+                "name": name
+            }).
+            execute())
+        self.labels.append(new_label)
+        return new_label
+
+    def id(self, name):
+        return self[name]["id"]
 
 
